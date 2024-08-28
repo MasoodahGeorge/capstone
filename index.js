@@ -32,11 +32,9 @@ app.use('/users', userRouter);
 app.use('/product', productRouter);
 app.use('/products', productRouter);
 
-
 app.get("^/$|/NodeProject", (req, res) => {
     res.status(200).sendFile(path.resolve("./static/html/index.html"));
 });
-
 
 app.get('*', (req, res) => {
     res.json({
@@ -45,10 +43,8 @@ app.get('*', (req, res) => {
     });
 });
 
-
 app.use(errorHandling);
 
-
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });

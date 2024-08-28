@@ -1,4 +1,5 @@
 import { connection as db } from "../config/index.js";
+import { hash } from "bcrypt";
 
 class Products {
     fetchProducts(req, res) {
@@ -143,5 +144,5 @@ class Products {
     }
 }
 
-const products = new Products();
-export { products };
+// let productsInstance  = new Products();
+export { Products  };

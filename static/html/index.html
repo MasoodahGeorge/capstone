@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 1</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <h2>Welcome to my website</h2>
+<div class="container">
+    <h3>Users</h3>
+    <div class="users">
+        <table>
+            <tr>
+                <th>HTTP Methods</th>
+                <th>Path</th>
+                <th>Description</th>
+            </tr>
+    
+            <tr>
+                <td>GET</td>
+                <td>/ (Home Page)</td>
+                <td>
+                    <p>Use the forward slash to see the Home Page </p>
+                </td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/User</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to display/ see all the Users.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/User/:id</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to display/ see only one user by provided the id of that user.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/User/register</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to register a user.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>PATCH</td>
+                <td>/User/:id</td>
+                <td>
+                    <p>Use the HTTP method and endpoint to edit a user's information.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/User/:id</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to delete a user.</p>
+                </td>
+            </tr>
+    
+        </table>
+    </div>
+
+    <h3>Products</h3>
+    <div  class="products">
+        <table>
+            <tr>
+                <th>HTTP Methods</th>
+                <th>Path</th>
+                <th>Description</th>
+            </tr>
+    
+            <tr>
+                <td>GET</td>
+                <td>/ (Home Page)</td>
+                <td>
+                    <p>Use the forward slash to see the Home Page </p>
+                </td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/Product</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to display/ see all the products.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/Product/:id</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to display/ see only one product by provided the id of that product.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/Product/add</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to add a product.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>PATCH</td>
+                <td>/Product/:id</td>
+                <td>
+                    <p>Use the HTTP method and endpoint to edit a product's information.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/Product/delete/:id</td>
+                <td>
+                    <p>Use this HTTP method and endpoint to delete a product.</p>
+                </td>
+            </tr>
+    
+        </table>
+    </div>
+</div>
+</body>
+</html>

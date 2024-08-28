@@ -1,12 +1,10 @@
 import { Users } from "./users.js";
 import { Products } from "./products.js";
 
+const usersFunc = new Users()
+const productsFunc = new Products()
 
-const users = new Users()
-const products = new Products()
-
-
-export{
-    users,
-    products
-}
+export {
+  usersFunc,
+  productsFunc
+};

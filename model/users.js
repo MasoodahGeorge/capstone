@@ -145,5 +145,17 @@ class Users {
     }
 }
 
-const users = new Users();
-export { users };
+function fetchUsers(callback) {
+    connection.query('SELECT * FROM users', (error, results) => {
+        if (error) {
+            console.error('Error occurred while fetching users:', error.message);
+            console.error('Error details:', error); // This will log the entire error object
+            return callback(error);
+        }
+        callback(null, results);
+    });
+}
+
+
+// let usersInstance = new Users();
+export { Users };
