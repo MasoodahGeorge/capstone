@@ -3,7 +3,7 @@ import cors from 'cors';
 import path from 'path';
 import { userRouter } from "./controller/userCont.js";
 import { productRouter } from "./controller/productCont.js";
-import { errorHandling } from './middleware/ErrorHandling.js';
+import { errorHandling } from "./middleware/errorHandling.js";
 
 const app = express();
 const port = +process.env.PORT || 3306;
