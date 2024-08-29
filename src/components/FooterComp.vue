@@ -56,6 +56,9 @@ export default {
 </script>
 
 <style scoped>
+.py-5{
+    position: fixed-bottom;
+}
     .b-example-divider {
   height: 3rem;
   background-color: rgba(0, 0, 0, .1);

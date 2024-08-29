@@ -4,9 +4,9 @@
             <div class="fixed-top">
                 <nav class="navbar navbar-expand-lg" id="nv">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="/index.html">
-                            <img src="https://i.postimg.cc/pLfnPJR0/B-1-removebg-preview.png" alt="Logo" class="d-inline-block align-text-top">
-                        </a>
+                        <router-link class="navbar-brand" to="/">
+                            <img src="https://github.com/MasoodahGeorge/CapstonePics/blob/main/PrettyPottery-removebg-preview.png?raw=true" alt="Logo" class="d-inline-block align-text-top">
+                        </router-link>
                         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -19,24 +19,24 @@
                             <div class="offcanvas-body">
                                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="/index.html">Home<span class="sr-only"></span></a>
+                                        <router-link class="nav-link" to="/">Home</router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/html/about.html">About</a>
+                                        <router-link class="nav-link" to="/about">About</router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/html/products.html">Products</a>
+                                        <router-link class="nav-link" to="/products">Products</router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/html/contact.html">Contact</a>
+                                        <router-link class="nav-link" to="/contact">Contact</router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/html/admin.html">Admin</a>
+                                        <router-link class="nav-link" to="/admin">Admin</router-link>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/html/cart.html" style="color: rgb(219, 111, 255);">
+                                        <router-link class="nav-link" to="/cart" style="color: rgb(219, 111, 255);">
                                             <img src="https://i.postimg.cc/fLRj09kc/cart.png" alt="cart" class="cart">
-                                        </a>
+                                        </router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -65,8 +65,14 @@ export default {
 }
 
 #nv {
-    background-color: #F8E3E7;
+    background-color: #ffffff;
     height: 50%;
     border-bottom: #333;
 }
+
+.nav-link {
+    color: rgb(255, 210, 218);
+}
+
+
 </style>
