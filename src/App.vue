@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavComp/>
+    <router-view/>
     <FooterComp/>
   </div>
 </template>
