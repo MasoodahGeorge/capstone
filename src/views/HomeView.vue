@@ -1,73 +1,45 @@
 <template>
   <div class="home">
-    <div class="landing">
-    </div>
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>عنوان المثال.</h1>
-            <p>تشير الدراسات الإحصائية حسب الجمعية الأمريكية للغات بأن الإقبال على العربية زاد %126 في الولايات المتحدة الأمريكية وحدها بين عامي 2002 و2009م.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">سجل اليوم</a></p>
-          </div>
-        </div>
+    <div class="landing"></div>
+    <div class="row featurette">
+      <div class="col-md-7">
+        <h2 class="featurette-heading">
+          First featurette heading.
+          <span class="text-muted">It’ll blow your mind.</span>
+        </h2>
+        <p class="lead">
+          Some great placeholder content for the first featurette here. Imagine
+          some exciting prose here.
+        </p>
       </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-        <div class="container">
-          <div class="carousel-caption">
-            <h1></h1>
-            <p></p>
-            <p><a class="btn btn-lg btn-primary" href="#"></a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1></h1>
-            <p></p>
-            <p><a class="btn btn-lg btn-primary" href="#"></a></p>
-          </div>
-        </div>
+      <div class="col-md-5">
+        <svg
+          class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+          width="500"
+          height="500"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Placeholder: 500x500"
+          preserveAspectRatio="xMidYMid slice"
+          focusable="false"
+        >
+          <title>Placeholder</title>
+          <rect width="100%" height="100%" fill="#eee" />
+          <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
+        </svg>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">السابق</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">التالي</span>
-    </button>
   </div>
-    
-</div>
 </template>
 
 <script>
-
 export default {
-  name: 'HomeView',
-  components: {
-
-    }
-}
+  name: "HomeView",
+  components: {},
+};
 </script>
 
 <style scoped>
-
 .landing {
   background-image: url("https://github.com/MasoodahGeorge/CapstonePics/blob/main/pexels-dariusz-duchiewicz-299516704-27818674.jpg?raw=true");
   background-size: cover;
@@ -75,13 +47,35 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
   display: flex;
-  min-height: 200vh;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: center;
   color: #ffffff;
   text-align: left;
 }
-.carousel{
-  height: 50vh;
+
+.row{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.col-md-7{
+  margin: auto 0;
+}
+.carousel {
+  margin-bottom: 4rem;
+}
+
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+.carousel-item {
+  height: 32rem;
+}
+.carousel-item > img {
+  top: 0;
+  left: 0;
 }
 </style>

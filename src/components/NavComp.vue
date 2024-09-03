@@ -4,12 +4,11 @@
             <div class="fixed-top">
                 <nav class="navbar navbar-expand-lg" id="nv">
                     <div class="container-fluid d-flex align-items-center justify-content-between">
-                        <!-- Logo on the left -->
+
                         <router-link class="navbar-brand" to="/">
                             <img id="brand-logo" src="https://github.com/MasoodahGeorge/CapstonePics/blob/main/PrettyPottery__1_-removebg-preview.png?raw=true" alt="Logo" class="brand-logo">
                         </router-link>
 
-                        <!-- Center navigation links -->
                         <div class="collapse navbar-collapse justify-content-center">
                             <ul class="navbar-nav">
                                 <li class="nav-item active">
@@ -107,7 +106,7 @@ export default {
     }
 
     .navbar-nav .nav-link {
-        color: #FF8FD2;
+        color: #fff;
         font-family: 'YourChosenFontFamily', sans-serif; /* Replace with the font family you want to use */
         font-size: 18px;
         margin-left: 30px;
