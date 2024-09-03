@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { usersFunc } from "../model/index.js";
+
 const userRouter = express.Router();
 
 userRouter.use(bodyParser.json());

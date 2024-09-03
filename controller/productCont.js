@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import { productsFunc } from "../model/index.js";
 
 const productRouter =  express.Router()
+
 productRouter.use(bodyParser.json())
 
 // all products
