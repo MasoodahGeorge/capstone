@@ -1,32 +1,60 @@
 <template>
   <div class="home">
-    <div class="landing"></div>
+    <div class="landing">
+      <h1>
+        Welcome to
+        <span style="color: pink" class="beth-ellen-regular"
+          >PrettyPottery</span
+        >
+      </h1>
+    </div>
+    <div class="container text-center">
+      <div class="row align-items-start">
+        <div class="col">
+          <img
+            src="https://i.postimg.cc/zBzqdhvz/B-4-removebg-preview-2.png"
+            class="home-img"
+          />
+          <h5>Worldwide Delivery</h5>
+        </div>
+        <div class="col">
+          <img
+            src="https://i.postimg.cc/N07g7DgC/B-5-removebg-preview-1.png"
+            class="home-img"
+          />
+          <h5>100% Cash Back</h5>
+        </div>
+        <div class="col">
+          <img
+            src="https://i.postimg.cc/CMvxQcbW/B-6-removebg-preview-1.png"
+            class="home-img"
+          />
+          <h5>Secure Payment</h5>
+        </div>
+      </div>
+    </div>
     <div class="row featurette">
       <div class="col-md-7">
         <h2 class="featurette-heading">
-          First featurette heading.
-          <span class="text-muted">It’ll blow your mind.</span>
+          Handcrafted
+          <span style="color: pink">Excellence</span>
         </h2>
-        <p class="lead">
-          Some great placeholder content for the first featurette here. Imagine
-          some exciting prose here.
+        <p class="lead" style="color: grey">
+          Our products are carefully selected to ensure they meet the highest
+          standards of craftsmanship.
         </p>
       </div>
       <div class="col-md-5">
-        <svg
+        <img
           class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+          src="https://github.com/MasoodahGeorge/CapstonePics/blob/main/pexels-kowalievska-1170982.jpg?raw=true"
           width="500"
           height="500"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Placeholder: 500x500"
-          preserveAspectRatio="xMidYMid slice"
-          focusable="false"
-        >
-          <title>Placeholder</title>
-          <rect width="100%" height="100%" fill="#eee" />
-          <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-        </svg>
+          alt="Beautiful Image"
+        />
+
+        <title>Placeholder</title>
+        <rect width="100%" height="100%" fill="#eee" />
       </div>
     </div>
   </div>
@@ -35,7 +63,6 @@
 <script>
 export default {
   name: "HomeView",
-  components: {},
 };
 </script>
 
@@ -54,12 +81,32 @@ export default {
   text-align: left;
 }
 
-.row{
+.beth-ellen-regular {
+  font-family: "Beth Ellen", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.landing > h1 {
+  margin: 0 auto;
+  font-size: 3rem;
+}
+
+.home-img {
+  width: 30%;
+}
+
+.container{
+  background-color: #ffecbf;
+  width: 100%;
+}
+
+.row {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-.col-md-7{
+.col-md-7 {
   margin: auto 0;
 }
 .carousel {
