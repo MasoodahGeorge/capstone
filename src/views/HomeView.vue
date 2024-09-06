@@ -8,34 +8,9 @@
         >
       </h1>
     </div>
-    <div class="container text-center">
-      <div class="row align-items-start">
-        <div class="col">
-          <img
-            src="https://i.postimg.cc/zBzqdhvz/B-4-removebg-preview-2.png"
-            class="home-img"
-          />
-          <h5>Worldwide Delivery</h5>
-        </div>
-        <div class="col">
-          <img
-            src="https://i.postimg.cc/N07g7DgC/B-5-removebg-preview-1.png"
-            class="home-img"
-          />
-          <h5>100% Cash Back</h5>
-        </div>
-        <div class="col">
-          <img
-            src="https://i.postimg.cc/CMvxQcbW/B-6-removebg-preview-1.png"
-            class="home-img"
-          />
-          <h5>Secure Payment</h5>
-        </div>
-      </div>
-    </div>
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">
+        <h2 class="featurette-heading" style="color: palevioletred;">
           Handcrafted
           <span style="color: pink">Excellence</span>
         </h2>
@@ -55,6 +30,25 @@
 
         <title>Placeholder</title>
         <rect width="100%" height="100%" fill="#eee" />
+      </div>
+    </div>
+
+    <div class="info-section fade-in">
+      <h2 class="section-title">Come visit us.</h2>
+      <div class="row justify-content-center info-content">
+        <div class="col-md-4 info-block text-center">
+          <h4>Address</h4>
+          <p>500 Landsdowne St.<br />Landsdowne, WC 7780</p>
+        </div>
+        <div class="col-md-1 divider"></div>
+        <div class="col-md-4 info-block text-center">
+          <h4>Opening Hours</h4>
+          <p>
+            Mon - Fri: 9am - 6pm<br />
+            Saturday: 10am - 2pm<br />
+            Sunday: Closed
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -91,7 +85,12 @@ export default {
   margin: 0 auto;
   font-size: 3rem;
 }
-
+.featurette-heading{
+  text-align: right;
+}
+.lead{
+  text-align: right;
+}
 .home-img {
   width: 30%;
 }
@@ -106,23 +105,39 @@ export default {
   padding-bottom: 2rem;
 }
 
+.row > h1{
+  text-align: center;
+}
 .col-md-7 {
   margin: auto 0;
 }
-.carousel {
-  margin-bottom: 4rem;
+.info-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-block h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #474747;
 }
 
-.carousel-caption {
-  bottom: 3rem;
-  z-index: 10;
+.info-block p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #474747;
+  margin: 0;
 }
 
-.carousel-item {
-  height: 32rem;
+.divider {
+  width: 1px;
+  height: 80px;
+  background-color: #474747;
+  margin: 0 2rem;
 }
-.carousel-item > img {
-  top: 0;
-  left: 0;
+
+.info-block {
+  padding: 0 1rem;
 }
 </style>

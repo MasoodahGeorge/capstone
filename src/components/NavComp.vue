@@ -69,7 +69,7 @@ export default {
             const navLinks = document.querySelectorAll('.nav-item-link');
             const navBorder = document.getElementById('nav-border');
 
-            if (window.scrollY > window.innerHeight / 2) {
+            if (window.scrollY > window.innerHeight / 5) {
                 nv.style.backgroundColor = '#fff';
                 navLinks.forEach(link => {
                     link.style.color = '#FF8FD2';
@@ -107,7 +107,6 @@ export default {
 
     .navbar-nav .nav-link {
         color: #fff;
-        font-family: 'YourChosenFontFamily', sans-serif; /* Replace with the font family you want to use */
         font-size: 18px;
         margin-left: 30px;
         transition: color 0.3s ease;

@@ -17,20 +17,25 @@
         <div class="col-3">
           <h5>About</h5>
           <ul class="nav flex-column">
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About Us</a></li>
-            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Contact Us</a></li>
+            <li class="nav-item mb-2"><router-link to="/about" class="nav-link p-0 text-muted">About Us</router-link></li>
+            <li class="nav-item mb-2"><router-link to="/contact" class="nav-link p-0 text-muted">Contact Us</router-link></li>
             <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Privacy Policy</a></li>
           </ul>
         </div>
 
         <div class="col-4 offset-1">
-          <form>
+          <form
+              action="https://formspree.io/f/mqazjybl"
+              method="POST"
+            >
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
             <div class="d-flex w-100 gap-2">
+              <label for="name" class="visually-hidden">First name:</label>
+              <input id="name" name="name" type="text" class="form-control" placeholder="Name" required>
               <label for="newsletter1" class="visually-hidden">Email address</label>
-              <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-              <button class="btn btn-primary" type="button">Subscribe</button>
+              <input id="newsletter1" name="email" type="email" class="form-control" placeholder="Email address" required>
+              <button class="btn btn-primary" type="submit" style="background-color: pink;border: none;">Subscribe</button>
             </div>
           </form>
         </div>
@@ -60,8 +65,7 @@ footer {
   padding: 3%;
 }
 
-.d-flex{
+.d-flex {
   border: red;
 }
-
 </style>

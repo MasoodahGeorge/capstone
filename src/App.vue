@@ -20,7 +20,7 @@ import FooterComp from './components/FooterComp.vue'
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family:Georgia, 'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
