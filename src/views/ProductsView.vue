@@ -96,6 +96,8 @@ export default {
 <style scoped>
 .products-view {
   padding: 20px;
+  background-color: pink;
+  padding-top: 10rem;
 }
 
 ul {
