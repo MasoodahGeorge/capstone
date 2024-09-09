@@ -10,6 +10,4 @@ function errorHandling(err, req, res, next) {
     }
 }
 
-module.exports = {
-    errorHandling
-};
+export default errorHandling;
