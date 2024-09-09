@@ -1,33 +1,19 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
+const express = require('express');
+const cartRoutes = require('./routes/cartRoute');
+const productRoutes = require('./routes/productsRoute');
+const userRoutes = require('./routes/usersRoute');
+const { errorHandling } = require('./middleware/errorHandling');
 
-// Import routes
-import cartRoutes from './routes/cartRoute.js';
-import productRoutes from './routes/productsRoute.js';
-import userRoutes from './routes/usersRoute.js';
-
-// Import error handling middleware
-import { errorHandling } from './middleware/errorHandling.js';
-
-// Initialize Express app
 const app = express();
 
-// Middleware
-app.use(cors()); // Enable CORS for all requests
-app.use(bodyParser.json()); // Parse incoming requests with JSON payloads
-
-// Root route (fixes "Cannot GET /" error)
-app.get('/', (req, res) => {
-    res.send('Welcome to the API!');
-});
+app.use(express.json()); // Support for parsing JSON
 
 // Routes
-app.use('/api/cart', cartRoutes); // Route for cart-related actions
-app.use('/api/products', productRoutes); // Route for product-related actions
-app.use('/api/users', userRoutes); // Route for user-related actions
+app.use('/cart', cartRoutes);
+app.use('/products', productRoutes);
+app.use('/users', userRoutes);
 
-// Error handling middleware (always at the end)
+// Error handling middleware
 app.use(errorHandling);
 
 // Start the server
