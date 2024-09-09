@@ -5,6 +5,8 @@ import ProductsView from '../views/ProductsView.vue'
 import ContactView from '../views/ContactView.vue'
 import AdminView from '../views/AdminView.vue'
 import CartView from '@/views/CartView.vue'
+import LoginView from '@/views/LoginView.vue'
+// import SignupView from '@/views/SignupView.vue'
 
 const routes = [
   {
@@ -37,6 +39,16 @@ const routes = [
     name: 'cart',
     component:  CartView
   },
+  {
+    path: '/login',
+    name: 'login',
+    component:  LoginView
+  },
+  // {
+  //   path: '/signup',
+  //   name: 'signup',
+  //   component:  SignupView
+  // },
 ]
 
 const router = createRouter({
