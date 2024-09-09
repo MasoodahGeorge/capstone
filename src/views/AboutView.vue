@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="intro-section">
-      <h1 class="text-center mb-4">About PrettyPottery</h1>
+      <h1 class="text-center mb-4">About Us</h1>
       <p class="lead text-center mb-5" style="color: white;">
         PrettyPottery was founded out of a love for beautiful ceramics and pottery. What began as a small personal collection has grown into an online store where we share our passion for craftsmanship with the world. Every item in our collection is selected for its quality and unique design.
       </p>
@@ -26,7 +26,7 @@
     <div class="row mt-5">
       <!-- Left column for another image -->
       <div class="col-md-6">
-        <img src="https://github.com/MasoodahGeorge/CapstonePics/blob/main/pexels-kowalievska-1170982.jpg?raw=true" class="img-fluid" alt="Modern building image" height="500" width="500">
+        <img src="https://github.com/MasoodahGeorge/CapstonePics/blob/main/pexels-kowalievska-1170982.jpg?raw=true" class="img-fluid" alt="Modern building image" >
       </div>
 
       <!-- Right column for list and button -->
