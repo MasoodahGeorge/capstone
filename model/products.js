@@ -1,4 +1,4 @@
-const db = require('../db');
+import db from '../config/index.js';
 
 const ProductModel = {
     getAllProducts: (callback) => {
@@ -29,4 +29,4 @@ const ProductModel = {
     }
 };
 
-module.exports = ProductModel;
+export default ProductModel;

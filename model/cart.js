@@ -1,4 +1,4 @@
-const db = require('../db');
+import db from '../config/index.js';
 
 const CartModel = {
     getCartItemsByUserId: (userId, callback) => {
@@ -17,4 +17,5 @@ const CartModel = {
     }
 };
 
-module.exports = CartModel;
+
+export default CartModel;

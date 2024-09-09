@@ -1,4 +1,4 @@
-const CartModel = require('../model/cart.js');
+import CartModel from '../model/cart.js';
 
 const CartController = {
     getCartItems: (req, res) => {
@@ -32,4 +32,4 @@ const CartController = {
     }
 };
 
-module.exports = CartController;
+export default CartController;

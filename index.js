@@ -1,23 +1,21 @@
-const express = require('express');
-const cartRoutes = require('./routes/cartRoute');
-const productRoutes = require('./routes/productsRoute');
-const userRoutes = require('./routes/usersRoute');
-const { errorHandling } = require('./middleware/errorHandling');
+import express from 'express';
+import cartRoutes from './routes/cartRoute.js';
+import productRoutes from './routes/productRoute.js';
+import userRoutes from './routes/usersRoute.js';
+import { errorHandling } from './middleware/errorHandling.js';
 
 const app = express();
 
-app.use(express.json()); // Support for parsing JSON
+app.use(express.json());
 
 // Routes
 app.use('/cart', cartRoutes);
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
 
-// Error handling middleware
+// Error handling middleware (always at the end)
 app.use(errorHandling);
 
-// Start the server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(8080, () => {
+    console.log('Server is running on port 8080');
 });

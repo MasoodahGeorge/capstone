@@ -1,8 +1,12 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-// Create a token for a user
+dotenv.config();
+
+const { sign, verify } = jwt;
+
 function createToken(user) {
-    return jwt.sign(
+    return sign(
         {
             email: user.email,
             id: user.id
@@ -12,25 +16,25 @@ function createToken(user) {
     );
 }
 
-// Middleware to verify the token
 function verifyAToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
-        return res.status(401).json({ msg: "Please login." });
+        return res.status(401).json({
+            msg: "Please login."
+        });
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        const decoded = verify(token, process.env.SECRET_KEY);
         req.user = decoded;
         next();
     } catch (err) {
-        res.status(403).json({ msg: "Invalid or expired token, please login again." });
+        res.status(403).json({
+            msg: "Invalid or expired token, please login again."
+        });
     }
 }
 
-module.exports = {
-    createToken,
-    verifyAToken
-};
+export { createToken, verifyAToken };

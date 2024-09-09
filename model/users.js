@@ -1,4 +1,4 @@
-const db = require('../db');
+import db from '../config/index.js';
 
 const UserModel = {
     getAllUsers: (callback) => {
@@ -18,4 +18,4 @@ const UserModel = {
     }
 };
 
-module.exports = UserModel;
+export default UserModel;
