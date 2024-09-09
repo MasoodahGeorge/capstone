@@ -1,6 +1,6 @@
 import express from 'express';
 import cartRoutes from './routes/cartRoute.js';
-import productRoutes from './routes/productRoute.js';
+import productRoutes from './routes/productsRoute.js';
 import userRoutes from './routes/usersRoute.js';
 import { errorHandling } from './middleware/errorHandling.js';
 
