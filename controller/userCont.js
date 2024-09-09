@@ -1,42 +1,44 @@
-import express from "express";
-import bodyParser from "body-parser";
-import { usersFunc } from "../model/index.js";
+const bcrypt = require('bcrypt');
+const UserModel = require('../model/users.js');
 
-const userRouter = express.Router();
+const UserController = {
+    getAllUsers: (req, res) => {
+        UserModel.getAllUsers((err, results) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.json(results);
+        });
+    },
 
-userRouter.use(bodyParser.json());
+    registerUser: async (req, res) => {
+        const userData = req.body;
+        const hashedPassword = await bcrypt.hash(userData.password, 10);
+        UserModel.createUser(userData, hashedPassword, (err) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.status(201).json({ message: 'User registered' });
+        });
+    },
 
-//fetch users
-userRouter.get('/', (req, res) => {
-    usersFunc.FetchUsers(req, res);
-});
-
-//fetch a user
-userRouter.get('/:id', (req, res) => {
-    usersFunc.FetchUser(req, res);
-});
-
-//register a new user
-userRouter.post('/register', (req, res) => {
-    usersFunc.RegisterUser(req, res);
-});
-
-//update a user
-userRouter.patch('/:id', (req, res) => {
-    usersFunc.UpdateUser(req, res);
-});
-
-//delete a user
-userRouter.delete('/:id', (req, res) => {
-    usersFunc.DeleteUser(req, res);
-});
-
-// Route for user login
-userRouter.post('/login', (req, res) => {
-    usersFunc.Login(req, res);
-});
-
-export {
-    express,
-    userRouter,
+    loginUser: (req, res) => {
+        const { email, password } = req.body;
+        UserModel.getUserByEmail(email, async (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            const user = results[0];
+            const isValid = await bcrypt.compare(password, user.password);
+            if (!isValid) {
+                return res.status(401).json({ error: 'Invalid password' });
+            }
+            res.json({ message: 'Logged in successfully', user });
+        });
+    }
 };
+
+module.exports = UserController;

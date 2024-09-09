@@ -1,41 +1,55 @@
-import express from "express";
-import bodyParser from "body-parser";
-import { productsFunc } from "../model/index.js";
+const ProductModel = require('../model/products.js');
 
-const productRouter =  express.Router()
+const ProductController = {
+    getAllProducts: (req, res) => {
+        ProductModel.getAllProducts((err, results) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.json(results);
+        });
+    },
 
-productRouter.use(bodyParser.json())
+    getProductById: (req, res) => {
+        const { id } = req.params;
+        ProductModel.getProductById(id, (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.json(results[0]);
+        });
+    },
 
-// all products
-productRouter.get('/', (req,res)=>{
-    productsFunc.fetchProducts(req,res)
-})
+    createProduct: (req, res) => {
+        const productData = req.body;
+        ProductModel.createProduct(productData, (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.status(201).json({ message: 'Product created', productId: result.insertId });
+        });
+    },
 
-// recent products
-productRouter.get('/recent', (req,res)=>{
-    productsFunc.fetchRecentProducts(req,res)
-})
+    updateProduct: (req, res) => {
+        const { id } = req.params;
+        const productData = req.body;
+        ProductModel.updateProduct(id, productData, (err) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.json({ message: 'Product updated' });
+        });
+    },
 
-// single product
-productRouter.get('/:id', (req,res)=>{
-    productsFunc.fetchAProduct(req,res)
-})
+    deleteProduct: (req, res) => {
+        const { id } = req.params;
+        ProductModel.deleteProduct(id, (err) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.json({ message: 'Product deleted' });
+        });
+    }
+};
 
-// add a product
-productRouter.post('/add', (req,res)=>{
-    productsFunc.addAProduct(req,res)
-})
-
-// update product
-productRouter.patch('/:id', (req,res)=>{
-    productsFunc.updateAProduct(req,res)
-})
-
-// delete a product
-productRouter.delete('/:id',(req,res)=>{
-    productsFunc.deleteAProduct(req,res)
-})
-
-export{
-    productRouter
-}
+module.exports = ProductController;

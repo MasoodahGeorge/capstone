@@ -1,24 +1,18 @@
-import { createPool } from "mysql2";
-import "dotenv/config";
+const mysql = require('mysql2');
 
-
-let connection = createPool({
-    host: process.env.HOSTDB,
-    database: process.env.DATABASE_NAME,
-    user: process.env.USERDB,
-    password: process.env.PASSWORDDB,
-    port: process.env.PORTDB,
-    multipleStatements: true,
-    connectionLimit: 50
+const db = mysql.createConnection({
+    host: 'bxo931ecdmxhc4zpbcdw-mysql.services.clever-cloud.com',
+    user: 'u4uzaqzrsrgw3edg',
+    password: 'Q2cvjQfgsuqBhvaAYdT9',
+    database: 'bxo931ecdmxhc4zpbcdw'
 });
 
-
-connection.on('connection', (pool) => {
-    if (!pool) throw new Error('Unable to Connect');
-    console.log('Connected to the database. Yayy');
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to MySQL:', err);
+        return;
+    }
+    console.log('Connected to MySQL database');
 });
 
-
-export {
-    connection
-};
+module.exports = db;

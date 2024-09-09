@@ -4,7 +4,7 @@ import { Cart } from "./cart.js";
 
 const usersFunc = new Users()
 const productsFunc = new Products()
-const cartFunc = new Products()
+const cartFunc = new Cart()
 
 export {
   usersFunc,
