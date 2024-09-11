@@ -6,7 +6,7 @@ const ProductController = {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            res.json(results);
+            res.json({ results }); // Wrap results in an object
         });
     },
 
