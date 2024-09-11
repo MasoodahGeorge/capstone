@@ -29,7 +29,7 @@
       <ul>
         <li v-for="product in filteredAndSortedProducts" :key="product.id">
           <h2>{{ product.name }}</h2>
-          <img :src="product.image" loading="lazy" class="img-fluid" :alt="product.name" />
+          <img :src="product.image_url" loading="lazy" class="img-fluid" :alt="product.name" />
           <p>{{ product.description }}</p>
           <p>Price: ${{ product.price }}</p>
         </li>
@@ -38,7 +38,6 @@
     <div v-else>No products available</div>
   </div>
 </template>
-
 
 <script>
 import axios from 'axios';
@@ -59,7 +58,7 @@ export default {
     filteredAndSortedProducts() {
       let filtered = this.products.filter((product) =>
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-        (this.selectedCategory === "" || product.categoryId === this.selectedCategory)
+        (this.selectedCategory === "" || product.category_id == this.selectedCategory) // Ensure correct category field
       );
 
       return filtered.sort((a, b) =>
@@ -76,8 +75,10 @@ export default {
       this.loading = true;
       try {
         const response = await axios.get('https://capstoneproject-89nz.onrender.com/products');
-        this.products = response.data;
+        console.log("API Response:", response.data); // Log to check structure
+        this.products = response.data.results || []; // Access results correctly
       } catch (err) {
+        console.error("Fetch Products Error:", err); // Log errors for troubleshooting
         this.error = 'Failed to load products. Please try again later :(';
       } finally {
         this.loading = false;
