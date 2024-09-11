@@ -16,7 +16,11 @@
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vue3-toastify": "^0.2.3",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "@vue/cli-plugin-babel": "^4.5.0",
+  "@vue/cli-plugin-eslint": "^4.5.0",
+  "@vue/cli-service": "^4.5.0",
+  "vue-template-compiler": "^2.6.14"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
