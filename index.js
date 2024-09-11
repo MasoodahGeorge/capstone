@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors'; // Import cors
 import cartRoutes from './routes/cartRoute.js';
 import productRoutes from './routes/productsRoute.js';
 import userRoutes from './routes/usersRoute.js';
@@ -9,6 +10,8 @@ const app = express();
 const port = +process.env.PORT || 8080;
 
 // Middleware for serving static files, JSON parsing, URL encoding
+app.use(cors()); // This allows cross-origin requests from any domain
+
 app.use(
     express.static(path.resolve(process.cwd(), 'static')),
     express.json(),
