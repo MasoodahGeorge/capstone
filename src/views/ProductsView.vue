@@ -1,7 +1,7 @@
 <template>
   <div class="products-view">
     <h1>Products</h1>
-    
+
     <!-- Filters -->
     <div class="controls mb-4">
       <!-- Search -->
@@ -35,8 +35,10 @@
         </li>
       </ul>
     </div>
+    <div v-else>No products available</div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
