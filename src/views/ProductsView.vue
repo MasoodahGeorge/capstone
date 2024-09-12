@@ -29,16 +29,17 @@
     <div v-if="error">{{ error }}</div>
 
     <!-- Products list -->
-    <div v-if="!loading && filteredAndSortedProducts.length">
+    <!-- <div v-if="!loading && filteredAndSortedProducts.length"> -->
       <ul>
-        <li v-for="product in filteredAndSortedProducts" :key="product.id">
+        <li v-for="product in products()" :key="product.id">
           <h2>{{ product.name }}</h2>
-          <img :src="product.image" loading="lazy" class="img-fluid" :alt="product.name" />
+          <img :src="product.image_url" loading="lazy" class="img-fluid" :alt="product.name" />
           <p>{{ product.description }}</p>
           <p>Price: ${{ product.price }}</p>
+          <router-link  to="{name:'product',params:{id:product.id}}">View More</router-link>
         </li>
       </ul>
-    </div>
+    <!-- </div> -->
 
     <!-- No products available -->
     <div v-if="!loading && filteredAndSortedProducts.length === 0">No products available</div>
@@ -46,13 +47,13 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
   data() {
     return {
-      products: [],  // Initialize as an empty array
-      categories: [],
+      // products: [],  // Initialize as an empty array
+      // categories: [],
       searchQuery: "",
       sortOrder: "asc",
       selectedCategory: "",
@@ -80,39 +81,43 @@ export default {
   },
   created() {
     this.fetchProducts();
-    this.fetchCategories();
+    // this.fetchCategories();
   },
   methods: {
-    async fetchProducts() {
-      this.loading = true;
-      this.error = null;
-      try {
-        const response = await axios.get('https://capstoneproject-89nz.onrender.com/products');
-        if (Array.isArray(response.data)) {
-          this.products = response.data;
-        } else {
-          throw new Error('Invalid product data format');
-        }
-      } catch (err) {
-        this.error = 'Failed to load products. Please try again later.';
-      } finally {
-        this.loading = false;
-      }
-    },
-    async fetchCategories() {
-      try {
-        const response = await axios.get('https://capstoneproject-89nz.onrender.com/categories');
-        if (Array.isArray(response.data)) {
-          this.categories = response.data;
-        } else {
-          console.error('Invalid category data format');
-        }
-      } catch (err) {
-        console.error("Error fetching categories:", err);
+    fetchProducts() {
+      this.$store.dispatch('fetchProducts')
+      // this.loading = true;
+      // this.error = null;
+      // try {
+      //   const response = await axios.get('https://capstoneproject-89nz.onrender.com/products');
+      //   if (Array.isArray(response.data)) {
+      //     this.products = response.data;
+      //   } else {
+      //     throw new Error('Invalid product data format');
+      //   }
+      // } catch (err) {
+      //   this.error = 'Failed to load products. Please try again later.';
+      // } finally {
+      //   this.loading = false;
+      },
+      products(){
+        return this.$store.state.products;
       }
     }
+    // async fetchCategories() {
+    //   try {
+    //     const response = await axios.get('https://capstoneproject-89nz.onrender.com/categories');
+    //     if (Array.isArray(response.data)) {
+    //       this.categories = response.data;
+    //     } else {
+    //       console.error('Invalid category data format');
+    //     }
+    //   } catch (err) {
+    //     console.error("Error fetching categories:", err);
+    //   }
+    // }
   }
-};
+
 </script>
 
 <style scoped>
