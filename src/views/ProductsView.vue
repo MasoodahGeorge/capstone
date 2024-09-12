@@ -30,19 +30,21 @@
 
     <!-- Products list -->
     <!-- <div v-if="!loading && filteredAndSortedProducts.length"> -->
-      <ul>
-        <li v-for="product in products()" :key="product.id">
-          <h2>{{ product.name }}</h2>
-          <img :src="product.image_url" loading="lazy" class="img-fluid" :alt="product.name" />
-          <p>{{ product.description }}</p>
-          <p>Price: ${{ product.price }}</p>
-          <router-link  to="{name:'product',params:{id:product.id}}">View More</router-link>
-        </li>
-      </ul>
+      <div>
+        <ul>
+          <li v-for="product in products()" :key="product.id" class="container text-center">
+            <h2>{{ product.name }}</h2>
+            <img :src="product.image_url" loading="lazy" class="img-fluid" :alt="product.name" />
+            <p>{{ product.description }}</p>
+            <p>Price: ${{ product.price }}</p>
+            <router-link  to="{name:'product',params:{id:product.id}}">View More</router-link>
+          </li>
+        </ul>
+      </div>
     <!-- </div> -->
 
     <!-- No products available -->
-    <div v-if="!loading && filteredAndSortedProducts.length === 0">No products available</div>
+    <!-- <div v-if="!loading && filteredAndSortedProducts.length === 0">No products available</div> -->
   </div>
 </template>
 
