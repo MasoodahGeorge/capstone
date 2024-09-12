@@ -11,13 +11,13 @@ function createToken(user) {
             email: user.email,
             id: user.id
         },
-        process.env.SECRET_KEY,
+        process.env.SECRET_KEY, // Ensure this key is in your .env
         { expiresIn: '1h' }
     );
 }
 
 function verifyAToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
+    const authHeader = req.headers.authorization; // Simplified header access
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
@@ -29,14 +29,12 @@ function verifyAToken(req, res, next) {
         req.user = decoded;
         next();
     } catch (err) {
-        // Handle specific JWT errors
         if (err.name === 'TokenExpiredError') {
             return res.status(403).json({ msg: "Token has expired, please login again." });
         }
         if (err.name === 'JsonWebTokenError') {
             return res.status(403).json({ msg: "Invalid token, please login again." });
         }
-        // For other errors
         res.status(500).json({ msg: "An error occurred during token verification." });
     }
 }
