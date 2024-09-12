@@ -88,21 +88,9 @@ export default {
       this.error = null;
       try {
         const response = await axios.get('https://capstoneproject-89nz.onrender.com/products');
-<<<<<<< HEAD
-        console.log("API Response:", response.data); // Log to check structure
-        this.products = response.data.results || []; // Access results correctly
+        this.products = response.data;
       } catch (err) {
-        console.error("Fetch Products Error:", err); // Log errors for troubleshooting
         this.error = 'Failed to load products. Please try again later :(';
-=======
-        if (Array.isArray(response.data)) {
-          this.products = response.data;
-        } else {
-          throw new Error('Invalid product data format');
-        }
-      } catch (err) {
-        this.error = 'Failed to load products. Please try again later.';
->>>>>>> 6042311bf817598e28b5935330fba45ffb714d3e
       } finally {
         this.loading = false;
       }
