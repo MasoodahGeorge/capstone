@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors'; // Import cors
 import cartRoutes from './routes/cartRoute.js';
 import productRoutes from './routes/productsRoute.js';
 import userRoutes from './routes/usersRoute.js';
@@ -9,12 +10,12 @@ const app = express();
 const port = +process.env.PORT || 8080;
 
 // Middleware for serving static files, JSON parsing, URL encoding
+app.use(cors()); // This allows cross-origin requests from any domain
+
 app.use(
-    express.static(path.resolve(process.cwd(), 'static')),
+    express.static(path.resolve(process.cwd(), 'static')), // Serve static files
     express.json(),
-    express.urlencoded({
-        extended: true
-    })
+    express.urlencoded({ extended: true })
 );
 
 // Define routes
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
 });
 
 // Handle 404 errors for all other routes
-app.get('*', (req, res) => {
+app.use((req, res) => {
     res.status(404).json({
         status: 404,
         msg: 'Resource not found'

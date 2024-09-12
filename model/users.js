@@ -1,20 +1,35 @@
 import db from '../config/index.js';
 
 const UserModel = {
-    getAllUsers: (callback) => {
+    getAllUsers: async () => {
         const sql = 'SELECT * FROM users';
-        db.query(sql, callback);
+        try {
+            const [results] = await db.promise().query(sql);
+            return results;
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     },
 
-    getUserByEmail: (email, callback) => {
+    getUserByEmail: async (email) => {
         const sql = 'SELECT * FROM users WHERE email = ?';
-        db.query(sql, [email], callback);
+        try {
+            const [results] = await db.promise().query(sql, [email]);
+            return results[0]; // Assuming you want the first user object returned
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     },
 
-    createUser: (userData, hashedPassword, callback) => {
+    createUser: async (userData, hashedPassword) => {
         const { username, email, first_name, last_name } = userData;
         const sql = 'INSERT INTO users (username, email, password, first_name, last_name) VALUES (?, ?, ?, ?, ?)';
-        db.query(sql, [username, email, hashedPassword, first_name, last_name], callback);
+        try {
+            const [results] = await db.promise().query(sql, [username, email, hashedPassword, first_name, last_name]);
+            return results;
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     }
 };
 
