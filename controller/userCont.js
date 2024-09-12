@@ -11,7 +11,7 @@ const UserController = {
         }
     },
 
-    registerUser: async (req, res) => { // Corrected typo here
+    registerUser: async (req, res) => {
         const userData = req.body;
         try {
             const hashedPassword = await bcrypt.hash(userData.password, 10);
@@ -25,10 +25,11 @@ const UserController = {
     loginUser: async (req, res) => {
         const { email, password } = req.body;
         try {
-            const user = await UserModel.getUserByEmail(email);
-            if (!user) { // Corrected condition
+            const results = await UserModel.getUserByEmail(email);
+            if (results.length === 0) {
                 return res.status(404).json({ error: 'User not found' });
             }
+            const user = results[0];
             const isValid = await bcrypt.compare(password, user.password);
             if (!isValid) {
                 return res.status(401).json({ error: 'Invalid password' });
