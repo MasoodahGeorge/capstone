@@ -1,31 +1,56 @@
 import db from '../config/index.js';
 
 const ProductModel = {
-    getAllProducts: (callback) => {
+    getAllProducts: async () => {
         const sql = 'SELECT * FROM products';
-        db.query(sql, callback);
+        try {
+            const [results] = await db.promise().query(sql);
+            return results;
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     },
 
-    getProductById: (id, callback) => {
+    getProductById: async (id) => {
         const sql = 'SELECT * FROM products WHERE id = ?';
-        db.query(sql, [id], callback);
+        try {
+            const [results] = await db.promise().query(sql, [id]);
+            return results[0]; // Assuming you want the first product object returned
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     },
 
-    createProduct: (productData, callback) => {
+    createProduct: async (productData) => {
         const { name, description, price, category, image_url } = productData;
         const sql = 'INSERT INTO products (name, description, price, category, image_url) VALUES (?, ?, ?, ?, ?)';
-        db.query(sql, [name, description, price, category, image_url], callback);
+        try {
+            const [results] = await db.promise().query(sql, [name, description, price, category, image_url]);
+            return results;
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     },
 
-    updateProduct: (id, productData, callback) => {
+    updateProduct: async (id, productData) => {
         const { name, description, price, category, image_url } = productData;
         const sql = 'UPDATE products SET name = ?, description = ?, price = ?, category = ?, image_url = ? WHERE id = ?';
-        db.query(sql, [name, description, price, category, image_url, id], callback);
+        try {
+            const [results] = await db.promise().query(sql, [name, description, price, category, image_url, id]);
+            return results;
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     },
 
-    deleteProduct: (id, callback) => {
+    deleteProduct: async (id) => {
         const sql = 'DELETE FROM products WHERE id = ?';
-        db.query(sql, [id], callback);
+        try {
+            const [results] = await db.promise().query(sql, [id]);
+            return results;
+        } catch (error) {
+            throw error; // Handle or rethrow the error as needed
+        }
     }
 };
 

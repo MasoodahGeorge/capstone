@@ -1,54 +1,57 @@
 import ProductModel from '../model/products.js';
 
 const ProductController = {
-    getAllProducts: (req, res) => {
-        ProductModel.getAllProducts((err, results) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.json({ results }); // Wrap results in an object
-        });
+    getAllProducts: async (req, res) => {
+        try {
+            const results = await ProductModel.getAllProducts();
+            res.status(200).json({ results }); // Wrap results in an object
+        } catch (err) {
+            res.status(500).json({ message: 'Error fetching products', error: err.message });
+        }
     },
 
-    getProductById: (req, res) => {
+    getProductById: async (req, res) => {
         const { id } = req.params;
-        ProductModel.getProductById(id, (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
+        try {
+            const results = await ProductModel.getProductById(id);
+            if (results.length === 0) {
+                return res.status(404).json({ message: 'Product not found' });
             }
-            res.json(results[0]);
-        });
+            res.status(200).json(results[0]);
+        } catch (err) {
+            res.status(500).json({ message: 'Error fetching product', error: err.message });
+        }
     },
 
-    createProduct: (req, res) => {
+    createProduct: async (req, res) => {
         const productData = req.body;
-        ProductModel.createProduct(productData, (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
+        try {
+            const result = await ProductModel.createProduct(productData);
             res.status(201).json({ message: 'Product created', productId: result.insertId });
-        });
+        } catch (err) {
+            res.status(500).json({ message: 'Error creating product', error: err.message });
+        }
     },
 
-    updateProduct: (req, res) => {
+    updateProduct: async (req, res) => {
         const { id } = req.params;
         const productData = req.body;
-        ProductModel.updateProduct(id, productData, (err) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.json({ message: 'Product updated' });
-        });
+        try {
+            await ProductModel.updateProduct(id, productData);
+            res.status(200).json({ message: 'Product updated' });
+        } catch (err) {
+            res.status(500).json({ message: 'Error updating product', error: err.message });
+        }
     },
 
-    deleteProduct: (req, res) => {
+    deleteProduct: async (req, res) => {
         const { id } = req.params;
-        ProductModel.deleteProduct(id, (err) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.json({ message: 'Product deleted' });
-        });
+        try {
+            await ProductModel.deleteProduct(id);
+            res.status(200).json({ message: 'Product deleted' });
+        } catch (err) {
+            res.status(500).json({ message: 'Error deleting product', error: err.message });
+        }
     }
 };
 

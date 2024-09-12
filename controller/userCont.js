@@ -2,32 +2,30 @@ import bcrypt from 'bcrypt';
 import UserModel from '../model/users.js';
 
 const UserController = {
-    getAllUsers: (req, res) => {
-        UserModel.getAllUsers((err, results) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.json(results);
-        });
+    getAllUsers: async (req, res) => {
+        try {
+            const results = await UserModel.getAllUsers();
+            res.status(200).json(results);
+        } catch (err) {
+            res.status(500).json({ message: 'Error fetching users', error: err.message });
+        }
     },
 
     registerUser: async (req, res) => {
         const userData = req.body;
-        const hashedPassword = await bcrypt.hash(userData.password, 10);
-        UserModel.createUser(userData, hashedPassword, (err) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
+        try {
+            const hashedPassword = await bcrypt.hash(userData.password, 10);
+            await UserModel.createUser(userData, hashedPassword);
             res.status(201).json({ message: 'User registered' });
-        });
+        } catch (err) {
+            res.status(500).json({ message: 'Error registering user', error: err.message });
+        }
     },
 
-    loginUser: (req, res) => {
+    loginUser: async (req, res) => {
         const { email, password } = req.body;
-        UserModel.getUserByEmail(email, async (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
+        try {
+            const results = await UserModel.getUserByEmail(email);
             if (results.length === 0) {
                 return res.status(404).json({ error: 'User not found' });
             }
@@ -36,8 +34,10 @@ const UserController = {
             if (!isValid) {
                 return res.status(401).json({ error: 'Invalid password' });
             }
-            res.json({ message: 'Logged in successfully', user });
-        });
+            res.status(200).json({ message: 'Logged in successfully', user });
+        } catch (err) {
+            res.status(500).json({ message: 'Error logging in', error: err.message });
+        }
     }
 };
 
