@@ -1,18 +1,23 @@
 import mysql from 'mysql2';
+import dotenv from 'dotenv';
 
-const db = mysql.createConnection({
-    host: 'bxo931ecdmxhc4zpbcdw-mysql.services.clever-cloud.com',
-    user: 'u4uzaqzrsrgw3edg',
-    password: 'Q2cvjQfgsuqBhvaAYdT9',
-    database: 'bxo931ecdmxhc4zpbcdw'
+dotenv.config();
+
+const db = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
-db.connect((err) => {
+// Test the connection
+db.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to MySQL:', err);
         return;
     }
     console.log('Connected to MySQL database');
+    connection.release(); // Release the connection back to the pool
 });
 
 export default db;
