@@ -22,10 +22,14 @@
       </select>
     </div>
 
-    <!-- Products -->
+    <!-- Loading Spinner -->
     <div v-if="loading">Loading...</div>
+
+    <!-- Error message -->
     <div v-if="error">{{ error }}</div>
-    <div v-if="filteredAndSortedProducts.length">
+
+    <!-- Products list -->
+    <div v-if="!loading && filteredAndSortedProducts.length">
       <ul>
         <li v-for="product in filteredAndSortedProducts" :key="product.id">
           <h2>{{ product.name }}</h2>
@@ -35,7 +39,9 @@
         </li>
       </ul>
     </div>
-    <div v-else>No products available</div>
+
+    <!-- No products available -->
+    <div v-if="!loading && filteredAndSortedProducts.length === 0">No products available</div>
   </div>
 </template>
 
@@ -45,7 +51,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      products: [],
+      products: [],  // Initialize as an empty array
       categories: [],
       searchQuery: "",
       sortOrder: "asc",
@@ -56,6 +62,12 @@ export default {
   },
   computed: {
     filteredAndSortedProducts() {
+      // Ensure products is an array before filtering
+      if (!Array.isArray(this.products)) {
+        return [];
+      }
+
+      // Filter and sort products
       let filtered = this.products.filter((product) =>
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
         (this.selectedCategory === "" || product.category_id == this.selectedCategory) // Ensure correct category field
@@ -73,13 +85,24 @@ export default {
   methods: {
     async fetchProducts() {
       this.loading = true;
+      this.error = null;
       try {
         const response = await axios.get('https://capstoneproject-89nz.onrender.com/products');
+<<<<<<< HEAD
         console.log("API Response:", response.data); // Log to check structure
         this.products = response.data.results || []; // Access results correctly
       } catch (err) {
         console.error("Fetch Products Error:", err); // Log errors for troubleshooting
         this.error = 'Failed to load products. Please try again later :(';
+=======
+        if (Array.isArray(response.data)) {
+          this.products = response.data;
+        } else {
+          throw new Error('Invalid product data format');
+        }
+      } catch (err) {
+        this.error = 'Failed to load products. Please try again later.';
+>>>>>>> 6042311bf817598e28b5935330fba45ffb714d3e
       } finally {
         this.loading = false;
       }
@@ -87,7 +110,11 @@ export default {
     async fetchCategories() {
       try {
         const response = await axios.get('https://capstoneproject-89nz.onrender.com/categories');
-        this.categories = response.data;
+        if (Array.isArray(response.data)) {
+          this.categories = response.data;
+        } else {
+          console.error('Invalid category data format');
+        }
       } catch (err) {
         console.error("Error fetching categories:", err);
       }

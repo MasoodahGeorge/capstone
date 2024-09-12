@@ -1,7 +1,8 @@
 <template>
   <div>
     <NavComp/>
-    <router-view/>
+    <SpinnerComp v-if="isLoading"/>
+    <router-view v-else/>
     <FooterComp/>
   </div>
 </template>
@@ -9,11 +10,13 @@
 <script>
 import NavComp from './components/NavComp.vue'
 import FooterComp from './components/FooterComp.vue'
+import SpinnerComp from './components/SpinnerComp.vue'
 
   export default{
     components: {
       NavComp,
-      FooterComp
+      FooterComp,
+      SpinnerComp
     }
   }
 </script>

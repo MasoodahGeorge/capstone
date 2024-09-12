@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <SpinnerComp v-if="isLoading" />
     <div class="intro-section">
       <h1 class="text-center mb-4">About Us</h1>
       <p class="lead text-center mb-5" style="color: white;">
@@ -53,9 +54,24 @@
 <script>
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import SpinnerComp from '@/components/SpinnerComp.vue'; // Import the Spinner
 
 export default {
   name: "AboutView",
+  components: {
+    SpinnerComp,
+  },
+  data() {
+    return {
+      isLoading: true, // Controls the spinner visibility
+    };
+  },
+  mounted() {
+    // Simulate loading time
+    setTimeout(() => {
+      this.isLoading = false; // Stop showing the spinner after 2 seconds
+    }, 2000);
+  },
 };
 </script>
 
