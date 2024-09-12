@@ -7,7 +7,7 @@ import userRoutes from './routes/usersRoute.js';
 import { errorHandling } from './middleware/errorHandling.js';
 
 const app = express();
-const port = +process.env.PORT || 8080;
+const port = +process.env.PORT || 3005;
 
 // Middleware for serving static files, JSON parsing, URL encoding
 app.use(cors()); // This allows cross-origin requests from any domain
