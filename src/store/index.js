@@ -13,6 +13,7 @@ export default createStore({
     products: null,
     recentProducts: null,
     product: null,
+    cart: [],
   },
   getters: {},
   mutations: {
@@ -31,6 +32,18 @@ export default createStore({
     setProduct(state, value) {
       state.product = value;
     },
+    addToCart(state, product) {
+      const existingProduct = state.cart.find(item => item.id === product.id);
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        state.cart.push({ ...product, quantity: 1 });
+      }
+    },
+    // Optional: Mutation to remove item from cart
+    removeFromCart(state, productId) {
+      state.cart = state.cart.filter(item => item.id !== productId);
+    }
   },
   actions: {
     // Users
@@ -137,6 +150,22 @@ export default createStore({
         });
       }
     },
+    addToCart(context, product) {
+      context.commit('addToCart', product);
+      toast.success('Product added to cart!', {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    },
+    // Optional: Action to remove item from cart
+    removeFromCart(context, productId) {
+      context.commit('removeFromCart', productId);
+      toast.success('Product removed from cart!', {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    },
+
 
     //  Products
     async fetchProducts(context) {
