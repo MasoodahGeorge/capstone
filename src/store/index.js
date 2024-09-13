@@ -37,13 +37,16 @@ export default createStore({
       if (existingProduct) {
         existingProduct.quantity++;
       } else {
-        state.cart.push({ ...product, quantity: 1 });
+        state.cart.push({ ...product, quantity: 1, price: Number(product.price) }); // Ensure price is a number
       }
     },
     // Optional: Mutation to remove item from cart
     removeFromCart(state, productId) {
       state.cart = state.cart.filter(item => item.id !== productId);
-    }
+    },
+    clearCart(state) {
+      state.cart = [];
+    },
   },
   actions: {
     // Users
@@ -161,6 +164,13 @@ export default createStore({
     removeFromCart(context, productId) {
       context.commit('removeFromCart', productId);
       toast.success('Product removed from cart!', {
+        autoClose: 2000,
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    },
+    clearCart(context) {
+      context.commit('clearCart');
+      toast.success('Cart cleared!', {
         autoClose: 2000,
         position: toast.POSITION.BOTTOM_CENTER,
       });
