@@ -42,7 +42,7 @@
   .loading-text {
     font-size: 24px;
     font-weight: bold;
-    color: #FF8FD2; /* Customize your color */
+    color: #C79B31; /* Customize your color */
   }
   </style>
   
