@@ -1,146 +1,106 @@
 <template>
-  <div class="products-view">
-    <h1>Products</h1>
-
-    <!-- Filters -->
-    <div class="controls mb-4">
-      <!-- Search -->
-      <input type="text" v-model="searchQuery" placeholder="Search products..." class="form-control me-2" />
-
-      <!-- Category -->
-      <select v-model="selectedCategory" class="form-select me-2">
-        <option value="">All Categories</option>
-        <option v-for="category in categories" :key="category.id" :value="category.id">
-          {{ category.name }}
-        </option>
-      </select>
-
-      <!-- Sort -->
-      <select v-model="sortOrder" class="form-select">
-        <option value="asc">Price: Low to High</option>
-        <option value="desc">Price: High to Low</option>
-      </select>
+  <div class="container mt-5">
+    <div v-if="loading" class="text-center">
+      <SpinnerComp /> <!-- Your loading spinner component -->
     </div>
-
-    <!-- Loading Spinner -->
-    <div v-if="loading">Loading...</div>
-
-    <!-- Error message -->
-    <div v-if="error">{{ error }}</div>
-    <div v-if="filteredAndSortedProducts.length">
-      <ul>
-        <li v-for="product in filteredAndSortedProducts" :key="product.id">
-          <h2>{{ product.name }}</h2>
-          <img :src="product.image" loading="lazy" class="img-fluid" :alt="product.name" />
-          <p>{{ product.description }}</p>
-          <p>Price: ${{ product.price }}</p>
-        </li>
-      </ul>
+    <div v-else>
+      <h2 class="text-center mb-5">Our Products</h2> <!-- Products heading -->
+      <div class="row justify-content-center">
+        <div v-for="product in products" :key="product.id" class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
+          <div class="card shadow-sm product-card"> <!-- Adjusted card class -->
+            <img :src="product.image_url" class="card-img-top product-image" alt="Product Image" />
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title text-center">{{ product.name }}</h5>
+              <!-- <p class="card-text text-muted">{{ product.description }}</p> -->
+              <p class="card-text"><strong>Price:</strong> R{{ product.price }}</p>
+              <!-- <p class="card-text"><strong>Category:</strong> {{ product.category }}</p> -->
+              <div class="mt-auto text-center">
+                <a :href="'/products/' + product.id" class="btn btn-primary">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div v-else>No products available</div>
   </div>
 </template>
 
 <script>
-// import axios from 'axios';
+import { mapState } from 'vuex';
+import SpinnerComp from '@/components/SpinnerComp.vue'; // Your Spinner component
 
 export default {
-  data() {
-    return {
-      products: [],
-      categories: [],
-      searchQuery: "",
-      sortOrder: "asc",
-      selectedCategory: "",
-      loading: false,
-      error: null,
-    };
+  components: {
+    SpinnerComp
   },
   computed: {
-    filteredAndSortedProducts() {
-      // Ensure products is an array before filtering
-      if (!Array.isArray(this.products)) {
-        return [];
-      }
-
-      // Filter and sort products
-      let filtered = this.products.filter((product) =>
-        product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-        (this.selectedCategory === "" || product.category_id == this.selectedCategory) // Ensure correct category field
-      );
-
-      return filtered.sort((a, b) =>
-        this.sortOrder === "asc" ? a.price - b.price : b.price - a.price
-      );
+    ...mapState(['products']),
+    loading() {
+      return this.products === null;
     }
   },
   created() {
-    this.fetchProducts();
-    // this.fetchCategories();
-  },
-  methods: {
-    async fetchProducts() {
-      this.loading = true;
-      try {
-        const response = await axios.get('https://capstoneproject-89nz.onrender.com/products');
-        this.products = response.data;
-      } catch (err) {
-        this.error = 'Failed to load products. Please try again later :(';
-      } finally {
-        this.loading = false;
-      }
-    },
-    async fetchCategories() {
-      try {
-        const response = await axios.get('https://capstoneproject-89nz.onrender.com/categories');
-        this.categories = response.data;
-      } catch (err) {
-        console.error("Error fetching categories:", err);
-      }
-    }
+    this.$store.dispatch('fetchProducts');
   }
-
+};
 </script>
 
 <style scoped>
-.products-view {
-  padding: 20px;
-  background-color: pink;
-  padding-top: 10rem;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.form-control,
-.form-select {
-  flex: 1;
-  max-width: 200px;
-  margin-right: 10px;
-}
-
-.img-fluid {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Ensures images are properly scaled and have a uniform height */
+.product-image {
+  width: 80%;
+  margin: 0 auto;
   object-fit: cover;
-  border-bottom: 1px solid #ddd;
+  height: 50%; /* Adjusted height for the image */
+}
+
+/* Set a fixed height for the card */
+.product-card {
+  height: 10vh; /* Adjusted height for the card */
+}
+
+/* Adds a box-shadow to make the cards look elevated */
+.card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust the layout of the card's text and buttons */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.text-muted {
+  font-size: 0.9rem;
+}
+
+/* Adjusts the button styling */
+.btn-primary {
+  background-color: rgb(240, 168, 180);
+  border-color: red;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Adjust card shadow and spacing for better structure */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 </style>
