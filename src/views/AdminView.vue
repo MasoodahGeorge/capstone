@@ -187,32 +187,30 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(product, index) in products" :key="product.prodID">
-              <td>{{ index + 1 }}</td>
-              <td>{{ product.prodName }}</td>
-              <td>{{ product.prodDescription }}</td>
-              <td>{{ product.Category }}</td>
-              <td>R{{ product.amount }}</td>
-              <td>
-                <button
-                  class="btn btn-warning"
-                  @click="handleEditProduct(product)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editProductModal"
-                >
-                  Edit
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn btn-danger"
-                  @click="handleDeleteProduct(product.prodID)"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
+  <tr v-for="(product, index) in products" :key="product.id">
+    <td>{{ index + 1 }}</td>
+    <td>{{ product.name }}</td> <!-- Reference correct field -->
+    <td>{{ product.description }}</td> <!-- Reference correct field -->
+    <td>{{ product.category }}</td> <!-- Reference correct field -->
+    <td>R{{ product.price }}</td> <!-- Reference correct field -->
+    <td>
+      <button
+        class="btn btn-warning"
+        @click="handleEditProduct(product)"
+        data-bs-toggle="modal"
+        data-bs-target="#editProductModal"
+      >
+        Edit
+      </button>
+    </td>
+    <td>
+      <button class="btn btn-danger" @click="handleDeleteProduct(product.id)">
+        Delete
+      </button>
+    </td>
+  </tr>
+</tbody>
+
         </table>
       </div>
   
@@ -417,7 +415,7 @@
       async fetchProducts() {
         try {
           const response = await axios.get(`${this.apiUrl}/products`);
-          this.products = response.data;
+          this.products = response.data.results; // Adjust for correct data path
         } catch (error) {
           console.error('Error fetching products:', error);
         }
@@ -433,7 +431,7 @@
       async handleAddProduct() {
         try {
           await axios.post(`${this.apiUrl}/products`, this.payload);
-          this.fetchProducts();
+          this.fetchProducts(); // Refresh product list
           this.showToast('Product added successfully');
         } catch (error) {
           console.error('Error adding product:', error);
@@ -442,8 +440,8 @@
       },
       async handleEditProduct() {
         try {
-          await axios.put(`${this.apiUrl}/products/${this.currentProduct.prodID}`, this.currentProduct);
-          this.fetchProducts();
+          await axios.put(`${this.apiUrl}/products/${this.currentProduct.id}`, this.currentProduct);
+          this.fetchProducts(); // Refresh product list
           this.showToast('Product updated successfully');
         } catch (error) {
           console.error('Error updating product:', error);
@@ -453,41 +451,11 @@
       async handleDeleteProduct(productId) {
         try {
           await axios.delete(`${this.apiUrl}/products/${productId}`);
-          this.fetchProducts();
+          this.fetchProducts(); // Refresh product list
           this.showToast('Product deleted successfully');
         } catch (error) {
           console.error('Error deleting product:', error);
           this.showToast('Error deleting product');
-        }
-      },
-      async handleAddUser() {
-        try {
-          await axios.post(`${this.apiUrl}/users`, this.newUser);
-          this.fetchUsers();
-          this.showToast('User added successfully');
-        } catch (error) {
-          console.error('Error adding user:', error);
-          this.showToast('Error adding user');
-        }
-      },
-      async handleEditUser() {
-        try {
-          await axios.put(`${this.apiUrl}/users/${this.currentUser.id}`, this.currentUser);
-          this.fetchUsers();
-          this.showToast('User updated successfully');
-        } catch (error) {
-          console.error('Error updating user:', error);
-          this.showToast('Error updating user');
-        }
-      },
-      async handleDeleteUser(userId) {
-        try {
-          await axios.delete(`${this.apiUrl}/users/${userId}`);
-          this.fetchUsers();
-          this.showToast('User deleted successfully');
-        } catch (error) {
-          console.error('Error deleting user:', error);
-          this.showToast('Error deleting user');
         }
       },
       showToast(message) {
@@ -503,6 +471,7 @@
     }
   };
   </script>
+  
 
 <style>
 main{
