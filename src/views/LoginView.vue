@@ -1,81 +1,79 @@
 <template>
   <div class="login">
-  <div class="form">
-    <ul class="tab-group">
-      <li class="tab active"><a href="#signup" @click="switchTab">Sign Up</a></li>
-      <li class="tab"><a href="#login" @click="switchTab">Log In</a></li>
-    </ul>
+    <div class="form">
+      <ul class="tab-group">
+        <li class="tab active"><a href="#signup" @click="switchTab">Sign Up</a></li>
+        <li class="tab"><a href="#login" @click="switchTab">Log In</a></li>
+      </ul>
 
-    <div class="tab-content">
-      <div id="signup">
-        <h1>Sign Up for Free</h1>
-        <form action="/" method="post">
-          <div class="top-row">
-            <div class="field-wrap">
-              <label :class="{ active: isActive }">
-                First Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
+      <div class="tab-content">
+        <!-- Sign-up form -->
+        <div id="signup">
+          <h1>Sign Up for Free</h1>
+          <form @submit.prevent="registerUser">
+            <div class="top-row">
+              <div class="field-wrap">
+                <label :class="{ active: isActive }">First Name<span class="req">*</span></label>
+                <input v-model="first_name" type="text" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
+              </div>
+
+              <div class="field-wrap">
+                <label :class="{ active: isActive }">Last Name<span class="req">*</span></label>
+                <input v-model="last_name" type="text" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
+              </div>
             </div>
 
             <div class="field-wrap">
-              <label :class="{ active: isActive }">
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
+              <label :class="{ active: isActive }">Email Address<span class="req">*</span></label>
+              <input v-model="email" type="email" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
             </div>
-          </div>
 
-          <div class="field-wrap">
-            <label :class="{ active: isActive }">
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
-          </div>
+            <div class="field-wrap">
+              <label :class="{ active: isActive }">Set A Password<span class="req">*</span></label>
+              <input v-model="password" type="password" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
+            </div>
 
-          <div class="field-wrap">
-            <label :class="{ active: isActive }">
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
-          </div>
+            <button type="submit" class="button button-block">Get Started</button>
+          </form>
+        </div>
 
-          <button type="submit" class="button button-block">Get Started</button>
-        </form>
+        <!-- Login form -->
+        <div id="login" style="display:none;">
+          <h1>Welcome Back!</h1>
+          <form @submit.prevent="loginUser">
+            <div class="field-wrap">
+              <label :class="{ active: isActive }">Email Address<span class="req">*</span></label>
+              <input v-model="login_email" type="email" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
+            </div>
+
+            <div class="field-wrap">
+              <label :class="{ active: isActive }">Password<span class="req">*</span></label>
+              <input v-model="login_password" type="password" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
+            </div>
+
+            <p class="forgot"><a href="#">Forgot Password?</a></p>
+            <button class="button button-block">Log In</button>
+          </form>
+        </div>
       </div>
-
-      <div id="login" style="display:none;">
-        <h1>Welcome Back!</h1>
-        <form action="/" method="post">
-          <div class="field-wrap">
-            <label :class="{ active: isActive }">
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
-          </div>
-
-          <div class="field-wrap">
-            <label :class="{ active: isActive }">
-              Password<span class="req">*</span>
-            </label>
-            <input type="password" required autocomplete="off" @focus="activateLabel" @blur="deactivateLabel" />
-          </div>
-
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-          <button class="button button-block">Log In</button>
-        </form>
-      </div>
-    </div><!-- tab-content -->
-  </div> <!-- /form -->
-</div>
+    </div>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "LoginView",
   data() {
     return {
       isActive: false,
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      login_email: '',
+      login_password: '',
     };
   },
   methods: {
@@ -104,6 +102,34 @@ export default {
         div.style.display = "none";
       });
       document.getElementById(targetId).style.display = "block";
+    },
+    async registerUser() {
+      try {
+        const response = await axios.post('http://localhost:3000/api/register', {
+          first_name: this.first_name,
+          last_name: this.last_name,
+          email: this.email,
+          password: this.password,
+        });
+        alert('Registration successful!');
+        console.log(response.data);
+      } catch (error) {
+        console.error('Registration error:', error);
+        alert('Error during registration');
+      }
+    },
+    async loginUser() {
+      try {
+        const response = await axios.post('http://localhost:3000/api/login', {
+          email: this.login_email,
+          password: this.login_password,
+        });
+        alert('Login successful!');
+        console.log(response.data);
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('Error during login');
+      }
     },
   },
 };

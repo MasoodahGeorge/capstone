@@ -6,6 +6,7 @@ import ContactView from '../views/ContactView.vue'
 import AdminView from '../views/AdminView.vue'
 import CartView from '@/views/CartView.vue'
 import LoginView from '@/views/LoginView.vue'
+import ProductView from '@/views/ProductView.vue'
 // import SignupView from '@/views/SignupView.vue'
 
 const routes = [
@@ -23,6 +24,11 @@ const routes = [
     path: '/products',
     name: 'products',
     component: ProductsView
+  },
+  {
+    path: '/product/:id',
+    name: 'product',
+    component: ProductView
   },
   {
     path: '/contact',

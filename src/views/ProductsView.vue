@@ -27,31 +27,27 @@
 
     <!-- Error message -->
     <div v-if="error">{{ error }}</div>
-
-    <!-- Products list -->
-    <div v-if="!loading && filteredAndSortedProducts.length">
+    <div v-if="filteredAndSortedProducts.length">
       <ul>
         <li v-for="product in filteredAndSortedProducts" :key="product.id">
           <h2>{{ product.name }}</h2>
-          <img :src="product.image_url" loading="lazy" class="img-fluid" :alt="product.name" />
+          <img :src="product.image" loading="lazy" class="img-fluid" :alt="product.name" />
           <p>{{ product.description }}</p>
           <p>Price: ${{ product.price }}</p>
         </li>
       </ul>
     </div>
-
-    <!-- No products available -->
-    <div v-if="!loading && filteredAndSortedProducts.length === 0">No products available</div>
+    <div v-else>No products available</div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
   data() {
     return {
-      products: [],  // Initialize as an empty array
+      products: [],
       categories: [],
       searchQuery: "",
       sortOrder: "asc",
@@ -80,12 +76,11 @@ export default {
   },
   created() {
     this.fetchProducts();
-    this.fetchCategories();
+    // this.fetchCategories();
   },
   methods: {
     async fetchProducts() {
       this.loading = true;
-      this.error = null;
       try {
         const response = await axios.get('https://capstoneproject-89nz.onrender.com/products');
         this.products = response.data;
@@ -98,17 +93,13 @@ export default {
     async fetchCategories() {
       try {
         const response = await axios.get('https://capstoneproject-89nz.onrender.com/categories');
-        if (Array.isArray(response.data)) {
-          this.categories = response.data;
-        } else {
-          console.error('Invalid category data format');
-        }
+        this.categories = response.data;
       } catch (err) {
         console.error("Error fetching categories:", err);
       }
     }
   }
-};
+
 </script>
 
 <style scoped>
