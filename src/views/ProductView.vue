@@ -1,4 +1,4 @@
-<template]>
+<template>
     <div>
         <div v-if="product()">
             {{$store.state.product}}
