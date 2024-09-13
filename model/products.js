@@ -1,15 +1,15 @@
 import db from '../config/index.js';
 
 const ProductModel = {
-    getAllProducts: async () => {
-        const sql = 'SELECT * FROM products';
+    getAllProducts: async (req, res) => {
         try {
-            const [results] = await db.promise().query(sql);
-            return results;
-        } catch (error) {
-            throw error; // Handle or rethrow the error as needed
+          const results = await ProductModel.getAllProducts();
+          res.status(200).json({ results }); // Sending wrapped results
+        } catch (err) {
+          res.status(500).json({ message: 'Error fetching products', error: err.message });
         }
-    },
+      },
+      
 
     getProductById: async (id) => {
         const sql = 'SELECT * FROM products WHERE id = ?';
