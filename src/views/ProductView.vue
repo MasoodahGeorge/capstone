@@ -1,4 +1,4 @@
-<template lang="">
+<template]>
     <div>
         <div v-if="product()">
             {{$store.state.product}}
@@ -23,6 +23,6 @@ export default {
     },
 }
 </script>
-<style lang="">
+<style scoped>
     
 </style>
