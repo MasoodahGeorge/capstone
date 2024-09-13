@@ -35,7 +35,7 @@
                   <strong>Total Amount:</strong>
                 </td>
                 <td colspan="2" id="total-amount" class="text-center">
-                  R {{ (totalAmount && typeof totalAmount === 'number') ? totalAmount.toFixed(2) : 'N/A' }}
+                  R {{ (totalAmount && typeof totalAmount === 'number') ? totalAmount.toFixed(2) : '00.00' }}
                 </td>
               </tr>
             </tfoot>
