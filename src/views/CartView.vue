@@ -10,7 +10,7 @@
 
         <!-- Show cart content when not loading -->
         <div v-else class="table-responsive">
-          <table class="table table-bordered">
+          <table class="table table-bordered" style="background-color: white;">
             <thead v-if="cartItems.length > 0">
               <tr>
                 <th>Product</th>

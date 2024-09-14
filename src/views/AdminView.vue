@@ -174,7 +174,7 @@
   
       <!-- Products Table -->
       <div class="table-responsive" v-if="products && products.length">
-        <table class="table">
+        <table class="table"  style="background-color: white;">
           <thead>
             <tr>
               <th>Item</th>
@@ -345,7 +345,7 @@
   
       <!-- Users Table -->
       <div class="table-responsive" v-if="users && users.length">
-        <table class="table">
+        <table class="table"  style="background-color: white;">
           <thead>
             <tr>
               <th>Item</th>
