@@ -1,5 +1,6 @@
 <template>
-  <div class="container mt-5">
+  <div class="products-view">
+    <div class="container mt-5">
     <div v-if="loading" class="text-center">
       <SpinnerComp /> <!-- Your loading spinner component -->
     </div>
@@ -44,6 +45,8 @@
       </div>
     </div>
   </div>
+  </div>
+  
 </template>
 
 <script>
@@ -107,6 +110,19 @@ export default {
 </script>
 
 <style scoped>
+  .products-view{
+  /* background-image: url("https://github.com/MasoodahGeorge/CapstonePics/blob/main/backgrnd.jpg?raw=true"); */
+   background-color: #DDACB4;
+    background-size: cover;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    background-blend-mode: darken;
+    background-position: center;
+    margin-bottom: 5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 .container{
   padding-top: 10rem;
 }
@@ -155,34 +171,35 @@ export default {
 
 /* Adjusts the button styling */
 .btn-primary {
-  background-color: rgb(240, 168, 180);
-  border-color: rgb(240, 168, 180);
+  background-color: #C79B31;
+  border-color: #C79B31;
   padding: 0.5rem 1rem;
   font-weight: 500;
   border-radius: 0.25rem;
 }
 
 .btn-primary:hover {
-  background-color: #C79B31;
-  border-color: #C79B31;
+  background-color: #977c3d;
+  border-color: #977c3d;
 }
 
 /* Adjusts the button styling for Add to Cart */
 .btn-secondary {
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: #C79B31;
+  border-color: #C79B31;
   padding: 0.5rem 1rem;
   font-weight: 500;
   border-radius: 0.25rem;
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268;
-  border-color: #545b62;
+  background-color: #977c3d;
+  border-color: #977c3d;
 }
 
 /* Adjust card shadow and spacing for better structure */
 .card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 </style>

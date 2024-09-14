@@ -1,4 +1,5 @@
 <template>
+  <div class="product-view">
     <div class="container">
       <!-- Breadcrumb for navigation -->
       <div v-if="product" class="breadcrumb mb-4">
@@ -37,6 +38,8 @@
         <Spinner />
       </div>
     </div>
+  </div>
+    
   </template>
   
   <script>
@@ -68,6 +71,20 @@
   .container {
     margin-top: 60px;
     padding: 20px;
+  }
+  .product-view{
+  /* background-image: url("https://github.com/MasoodahGeorge/CapstonePics/blob/main/backgrnd.jpg?raw=true"); */
+   background-color: #DDACB4;
+    background-size: cover;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    background-blend-mode: darken;
+    background-position: center;
+    padding-top: 5rem;
+    margin-bottom: 5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .breadcrumb {
