@@ -476,6 +476,15 @@
 <style>
 main{
     padding-top: 10rem;
-    background-color: pink;
+    background-color: #DDACB4;
+}
+.btn{
+  background-color: #C79B31;
+  border-color: #C79B31;
+  color: #fff;
+}
+.btn:hover {
+  background-color: #977c3d;
+  border-color: #977c3d;
 }
 </style>

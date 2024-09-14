@@ -4,7 +4,12 @@
     <main class="main-content" id="cart-body">
       <div class="container">
         <h2 id="cart-heading">Your Cart</h2>
-        <div class="table-responsive">
+
+        <!-- Show spinner when loading -->
+        <SpinnerComp v-if="isLoading" />
+
+        <!-- Show cart content when not loading -->
+        <div v-else class="table-responsive">
           <table class="table table-bordered">
             <thead v-if="cartItems.length > 0">
               <tr>
@@ -54,7 +59,7 @@
         </div>
 
         <!-- Checkout button or empty cart message -->
-        <div class="order-summary" v-if="cartItems.length > 0">
+        <div class="order-summary" v-if="cartItems.length > 0 && !isLoading">
           <button
             class="btn btn-primary checkout-btn"
             id="checkout-button"
@@ -65,7 +70,7 @@
         </div>
 
         <!-- Thank you message after checkout -->
-        <div v-if="checkoutCompleted" class="text-center mt-4">
+        <div v-if="checkoutCompleted && !isLoading" class="text-center mt-4">
           <h3>Thank you for your purchase!</h3>
         </div>
       </div>
@@ -75,12 +80,17 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import SpinnerComp from '@/components/SpinnerComp.vue'; // Import SpinnerComp
 
 export default {
   name: 'CartView',
+  components: {
+    SpinnerComp,
+  },
   data() {
     return {
       checkoutCompleted: false, // Track checkout status
+      isLoading: true, // Track loading status
     };
   },
   computed: {
@@ -93,6 +103,12 @@ export default {
         return total + (item.price && typeof item.price === 'number' ? item.price * item.quantity : 0);
       }, 0);
     }
+  },
+  mounted() {
+    // Simulate data loading with a timeout
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000); // 2 seconds delay to show loading
   },
   methods: {
     ...mapActions(['removeFromCart']),
@@ -108,11 +124,11 @@ export default {
 </script>
 
 <style scoped>
-.btn{
+.btn {
   background-color: #C79B31;
   border-color: #C79B31;
 }
-.btn:hover{
+.btn:hover {
   background-color: #977c3d;
   border-color: #977c3d;
 }
